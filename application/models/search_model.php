@@ -12,7 +12,9 @@ class Search_model extends CI_Model {
     function search()
     {
         $reg_no = $this->input->post('reg_no');
-        $bdate =$this->input->post('bdate');        
+        $bdate = $this->input->post('bdate'); 
+        $bdate = date("y-m-d",strtotime($bdate));
+       
         $sql = "select * from competent_result as c JOIN persons AS p ON c.reg_no = p.reg_no where c.reg_no = '$reg_no' AND p.dob = '$bdate' ";
         $query = $this->db->query($sql);
         return $query->result();

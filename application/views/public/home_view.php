@@ -27,10 +27,23 @@ $this->load->view('templates/_parts/admin_master_header_view');
         <h3>Search Result</h3> <hr/>
         <?php if(!empty($user_result)) { ?>
             <?php foreach ($user_result as $r) {
-                echo 'Reg No - '.$r->reg_no.'<br/>';
-                echo 'Level -  '.$r->level.'<br/>';
-                echo 'Type - '.$r->type.'<br/>';
-                echo 'Result - '.$r->result.'<br/>';
+                //echo 'Reg No - '.$r->reg_no.'<br/>';
+                
+                foreach ($get_level as $l) {
+                    if($r->level == $l->id)
+                        echo 'Level - '.$l->level_val.'<br/>';
+                }
+            
+                foreach ($asses_type as $l) {
+                    if($r->type == $l->id)
+                        echo 'Type - '.$l->type_val.'<br/>';
+                }
+                
+                foreach ($result_type as $l) {
+                    if($r->result == $l->id)
+                        echo 'Result - '.$l->res_val.'<br/>';
+                }
+                    
                 echo '<hr/>';
             }
             ?>

@@ -40,6 +40,10 @@ class Result extends Admin_Controller
 		$this->data['comptent_id'] = $comptent_id;
 		$this->data['user_result'] = $this->result_model->get_user_result($comptent_id);
 
+		$this->data['get_level'] = $this->result_model->get_level();
+		$this->data['result_type'] = $this->result_model->get_result_type();
+		$this->data['asses_type'] = $this->result_model->get_asses_type();		
+
 		$this->render('backend/result_list');
 	}	
 

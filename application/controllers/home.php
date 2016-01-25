@@ -35,7 +35,11 @@ class Home extends Public_Controller
                 //show error
             }
             else{
+             $this->load->model('result_model');
              $this->data['user_result'] = $this->search_model->search();
+             $this->data['get_level'] = $this->result_model->get_level();
+             $this->data['result_type'] = $this->result_model->get_result_type();
+             $this->data['asses_type'] = $this->result_model->get_asses_type();               
             }
         }
         

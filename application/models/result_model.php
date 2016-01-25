@@ -48,9 +48,21 @@ class Result_model extends CI_Model {
     //fetch assesment level
     function get_level()
     {
-        $sql = "select * from asses_level ";
-        $query = $this->db->query($sql);
-        return $query->result();
+        $this->load->driver('cache', array('adapter' => 'file'));
+        if ( ! $level = $this->cache->get('level'))
+        {
+            $sql = "select * from asses_level ";
+            $query = $this->db->query($sql);
+            foreach ($query->result() as $value) {
+                $data[] = $value;
+            }
+            // Save into the cache
+            $this->cache->save('level', $data, 0);
+            //$this->cache->delete('site_model_getAll');
+            return $query->result();
+        }
+        
+        return $level;
     }  
 
     //fetch assesment result types
@@ -67,6 +79,6 @@ class Result_model extends CI_Model {
         $sql = "select * from asses_type ";
         $query = $this->db->query($sql);
         return $query->result();
-    }        
+    }
     
 }

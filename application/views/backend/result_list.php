@@ -17,9 +17,26 @@
             <tbody>
             <?php foreach ($user_result as $r) { ?>
                 <tr>
-                    <td><?php echo $r->level;  ?></td>
-                    <td><?php echo $r->type;  ?></td>
-                    <td><?php echo $r->result;  ?></td>
+                    <?php 
+                    foreach ($get_level as $l) {
+                        if($r->level == $l->id)
+                            echo '<td>'.$l->level_val.'</td>';
+                    }
+                    ?>
+                    <?php 
+                    foreach ($asses_type as $l) {
+                        if($r->type == $l->id)
+                            echo '<td>'.$l->type_val.'</td>';
+                    }
+                    ?>  
+
+                    <?php 
+                    foreach ($result_type as $l) {
+                        if($r->result == $l->id)
+                            echo '<td>'.$l->res_val.'</td>';
+                    }
+                    ?>                                     
+                    
                     <td><?php echo $r->date;  ?></td>
                     <td><?php echo $r->exp_date;  ?></td>
                     <td>
