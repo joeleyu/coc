@@ -3,6 +3,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Users extends Admin_Controller
 {
+    var $data;
 
     function __construct()
     {
@@ -10,13 +11,12 @@ class Users extends Admin_Controller
         if(!$this->ion_auth->in_group('admin'))
         {
             $this->session->set_flashdata('message','You are not allowed to visit the Groups page');
-            redirect('admin','refresh');
+            redirect('admin/denied');
         }
     }
 
     public function index($group_id = NULL)
     {
-        $this->load->view('templates/menu-bar');
         $this->data['page_title'] = 'Users';
         $this->data['users'] = $this->ion_auth->users($group_id)->result();
         $this->render('admin/users/list_users_view');
@@ -24,7 +24,6 @@ class Users extends Admin_Controller
 
     public function create()
     {
-        $this->load->view('templates/menu-bar');
         $this->data['page_title'] = 'Create user';
         $this->load->library('form_validation');
         $this->form_validation->set_rules('first_name','First name','trim');
@@ -64,7 +63,6 @@ class Users extends Admin_Controller
 
     public function edit($user_id = NULL)
     {
-        $this->load->view('templates/menu-bar');
         $user_id = $this->input->post('user_id') ? $this->input->post('user_id') : $user_id;
         if($this->data['current_user']->id == $user_id)
         {

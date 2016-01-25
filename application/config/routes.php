@@ -2,7 +2,7 @@
  
 defined('BASEPATH') OR exit('No direct script access allowed');
  
-$route['default_controller'] = 'welcome';
+$route['default_controller'] = 'home';
 $route['404_override'] = 'findcontent';
 $route['translate_uri_dashes'] = TRUE;
  
@@ -10,12 +10,8 @@ $route['admin'] = 'admin/dashboard';
  
 $controllers_methods = array(
     'en' => array(
-        'welcome/list' => 'welcome/list',
-        'welcome' => 'welcome'
-    ),
-    'fr' => array(
-        'bienvenu/list' => 'welcome/list',
-        'bienvenu' => 'welcome'
+        'home/list' => 'home/list',
+        'home' => 'home'
     )
 );
  

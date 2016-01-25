@@ -12,6 +12,11 @@ class User extends MY_Controller
 
     public function index()
     {
+        if($this->ion_auth->logged_in()) {
+            redirect('admin/user/profile');
+        }else{
+            $this->login();
+        }
 	}
 
     public function login()
@@ -40,7 +45,6 @@ class User extends MY_Controller
 
     public function profile()
     {
-        $this->load->view('templates/menu-bar');
         $this->data['page_title'] = 'User Profile';
         $user = $this->ion_auth->user()->row();
         $this->data['user'] = $user;

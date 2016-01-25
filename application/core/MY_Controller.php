@@ -6,7 +6,7 @@ class MY_Controller extends CI_Controller
 	function __construct()
 	{
 		parent::__construct();
-		$this->data['page_title'] = 'Coc App';
+		$this->data['page_title'] = 'Coc Confirmation App';
 		$this->data['before_head'] = '';
 		$this->data['before_body'] = '';
 	}
@@ -44,12 +44,25 @@ class Admin_Controller extends MY_Controller
 		}
 		$this->data['current_user'] = $this->ion_auth->user()->row();
 		$this->data['current_user_menu'] = '';
+		$this->data['data_encoder'] = '';
+		$this->data['data_expert'] = '';
+		$this->data['is_admin'] = '';
+		$this->data['officer_id'] = $this->ion_auth->get_user_id();
 		if($this->ion_auth->in_group('admin'))
 		{
 			$this->data['current_user_menu'] = $this->load->view('templates/_parts/user_menu_admin_view.php', NULL, TRUE);
+			$this->data['is_admin'] = TRUE;
 		}
 
-		$this->data['page_title'] = 'Coc App - Dashboard';
+		if( $this->ion_auth->in_group('data-encoder')) { 
+			$this->data['data_encoder'] = TRUE;
+		}
+
+		if( $this->ion_auth->in_group('data-expert')) { 
+			$this->data['data_expert'] = TRUE;
+		}		
+
+		$this->data['page_title'] = 'CoC Confirmation App - Dashboard';
 	}
 	protected function render($the_view = NULL, $template = 'admin_master')
 	{

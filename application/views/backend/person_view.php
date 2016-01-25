@@ -1,6 +1,8 @@
  
 <div class="container">
-    <button class="btn btn-success" onclick="add_person()"><i class="glyphicon glyphicon-plus"></i> Add Person</button>
+    <?php if($is_admin == TRUE || $data_encoder == TRUE) { ?>
+    <button class="btn btn-success" onclick="add_person()"><i class="glyphicon glyphicon-plus"></i> Add Competent</button>
+    <?php } ?>
     <button class="btn btn-default" onclick="reload_table()"><i class="glyphicon glyphicon-refresh"></i> Reload</button>
     <br />
     <br />
@@ -8,11 +10,11 @@
         <table id="table" class="table table-striped table-bordered" cellspacing="0" width="100%">
             <thead>
                 <tr>
-                    <th>First Name</th>
-                    <th>Last Name</th>
-                    <th>Gender</th>
+                    <th>Full Name</th>
+                    <th>Reg ID</th>
+                    <th>Date</th>
                     <th>Address</th>
-                    <th>Date of Birth</th>
+                    <!-- <th>Date of Birth</th> -->
                     <th style="width:125px;">Action</th>
                 </tr>
             </thead>
@@ -78,6 +80,8 @@ $(document).ready(function() {
 
 });
 
+
+<?php if($is_admin == TRUE || $data_encoder == TRUE) { ?> 
 function add_person()
 {
     save_method = 'add';
@@ -85,7 +89,7 @@ function add_person()
     $('.form-group').removeClass('has-error'); // clear error class
     $('.help-block').empty(); // clear error string
     $('#modal_form').modal('show'); // show bootstrap modal
-    $('.modal-title').text('Add Person'); // Set Title to Bootstrap modal title
+    $('.modal-title').text('Add New Competent'); // Set Title to Bootstrap modal title
 }
 
 function edit_person(id)
@@ -94,11 +98,9 @@ function edit_person(id)
     $('#form')[0].reset(); // reset form on modals
     $('.form-group').removeClass('has-error'); // clear error class
     $('.help-block').empty(); // clear error string 
-    
-    // show bootstrap modal when complete loaded
     $('#modal_form').modal('show');
-    $('.modal-title').text('Edit Person'); // Set title to Bootstrap modal title  
-
+    // show bootstrap modal when complete loaded
+    $('.modal-title').text('Edit Competent Info'); // Set title to Bootstrap modal title    
     //Ajax Load data from ajax
     $.ajax({
         url : "<?php echo site_url('person/ajax_edit/')?>/" + id,
@@ -108,6 +110,8 @@ function edit_person(id)
         {
 
             $('[name="id"]').val(data.id);
+            $('[name="reg_no"]').val(data.reg_no);
+            $('[name="reg_date"]').val(data.reg_date);
             $('[name="firstName"]').val(data.firstName);
             $('[name="lastName"]').val(data.lastName);
             $('[name="gender"]').val(data.gender);
@@ -120,11 +124,6 @@ function edit_person(id)
             alert('Error get data from ajax');
         }
     });
-}
-
-function reload_table()
-{
-    table.ajax.reload(null,false); //reload datatable ajax 
 }
 
 function save()
@@ -200,20 +199,44 @@ function delete_person(id)
     }
 }
 
+<?php } ?>
+
+function reload_table()
+{
+    table.ajax.reload(null,false); //reload datatable ajax 
+}
+
 </script>
 
+<?php if($is_admin == TRUE || $data_encoder == TRUE) { ?> 
 <!-- Bootstrap modal -->
 <div class="modal fade" id="modal_form" role="dialog">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h3 class="modal-title">Person Form</h3>
+                <h3 class="modal-title">Add New Competent</h3>
             </div>
             <div class="modal-body form">
                 <form action="#" id="form" class="form-horizontal">
                     <input type="hidden" value="" name="id"/> 
-                    <div class="form-body">
+                    <div class="form-body"> 
+                        <div class="form-group">
+                            <label class="control-label col-md-3">Reg No.</label>
+                            <div class="col-md-9">
+                                <input name="reg_no" placeholder="Reg No." class="form-control" type="text">
+                                <span class="help-block"></span>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label col-md-3">Reg Date</label>
+                            <div class="col-md-9">
+                                <input name="reg_date" placeholder="yyyy-mm-dd" class="form-control" type="text">
+                                <span class="help-block"></span>
+                            </div>
+                        </div>
+
                         <div class="form-group">
                             <label class="control-label col-md-3">First Name</label>
                             <div class="col-md-9">
@@ -264,3 +287,4 @@ function delete_person(id)
     </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
 <!-- End Bootstrap modal -->
+<?php } ?>

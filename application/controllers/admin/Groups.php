@@ -3,6 +3,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Groups extends Admin_Controller
 {
+    var $data;
 
     function __construct()
     {
@@ -10,13 +11,12 @@ class Groups extends Admin_Controller
         if(!$this->ion_auth->in_group('admin'))
         {
             $this->session->set_flashdata('message','You are not allowed to visit the Groups page');
-            redirect('admin','refresh');
+            redirect('admin/denied');
         }
     }
 
     public function index()
     {
-        $this->load->view('templates/menu-bar');
         $this->data['page_title'] = 'Groups';
         $this->data['groups'] = $this->ion_auth->groups()->result();        
         $this->render('admin/groups/list_groups_view');
@@ -24,7 +24,6 @@ class Groups extends Admin_Controller
 
     public function create()
     {
-        $this->load->view('templates/menu-bar');
         $this->data['page_title'] = 'Create group';
         $this->load->library('form_validation');
         $this->form_validation->set_rules('group_name','Group name','trim|required|is_unique[groups.name]');
@@ -46,7 +45,6 @@ class Groups extends Admin_Controller
 
     public function edit($group_id = NULL)
     {
-        $this->load->view('templates/menu-bar');
         $group_id = $this->input->post('group_id') ? $this->input->post('group_id') : $group_id;
         $this->data['page_title'] = 'Edit group';
         $this->load->library('form_validation');

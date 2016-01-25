@@ -4,7 +4,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class Person_model extends CI_Model {
 
 	var $table = 'persons';
-	var $column = array('firstname','lastname','gender','address','dob'); //set column field database for order and search
+	var $column = array('reg_no','reg_date','firstname','lastname','gender','address','dob'); //set column field database for order and search
 	var $order = array('id' => 'desc'); // default order 
 
 	public function __construct()
@@ -22,7 +22,7 @@ class Person_model extends CI_Model {
 	
 		foreach ($this->column as $item) // loop column 
 		{
-			if($_POST['search']['value']) // if datatable send POST for search
+			if(isset($_POST['search']) && $_POST['search']['value']) // if datatable send POST for search
 			{
 				
 				if($i===0) // first loop
@@ -56,7 +56,7 @@ class Person_model extends CI_Model {
 	function get_datatables()
 	{
 		$this->_get_datatables_query();
-		if($_POST['length'] != -1)
+		if(isset($_POST['length']) && $_POST['length'] != -1)
 		$this->db->limit($_POST['length'], $_POST['start']);
 		$query = $this->db->get();
 		return $query->result();

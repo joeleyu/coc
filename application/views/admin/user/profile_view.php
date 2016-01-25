@@ -4,7 +4,7 @@
         <div class="col-lg-6">
             <h1>Profile page</h1>
             <hr>
-            <?php echo form_open('',array('class'=>'form-horizontal'));?>
+            <?php echo form_open('',array('class'=>''));?>
             <div class="form-group">
                 <?php
                 echo form_label('First name','first_name');
