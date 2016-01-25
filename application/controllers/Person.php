@@ -15,6 +15,7 @@ class Person extends Admin_Controller {
 		//$this->load->view('templates/menu-bar');
 		
 		//$this->load->view('templates/admin_master_view');
+		$this->data['page_title'] = 'Competents';
 		$this->render('backend/person_view');
 	}
 
@@ -34,13 +35,15 @@ class Person extends Admin_Controller {
 			//$row[] = $person->dob;
 
 			//add html for action
+			$actions = '';
 			if($this->data['is_admin'] == TRUE || $this->data['data_encoder'] == TRUE) { 
-			$row[] = '<a class="btn btn-xs btn-primary" href="javascript:void()" title="Edit" onclick="edit_person('."'".$person->id."'".')"><i class="glyphicon glyphicon-pencil"></i></a>
-				  <a class="btn btn-xs btn-danger" href="javascript:void()" title="Hapus" onclick="delete_person('."'".$person->id."'".')"><i class="glyphicon glyphicon-trash"></i></a>';
+			$actions .= '<a class="btn btn-xs btn-primary" href="javascript:void()" title="Edit" onclick="edit_person('."'".$person->id."'".')"><i class="glyphicon glyphicon-pencil"></i></a>
+				  <a class="btn btn-xs btn-danger" href="javascript:void()" title="Hapus" onclick="delete_person('."'".$person->id."'".')"><i class="glyphicon glyphicon-trash"></i></a> ';
 			}
-			else if($this->data['is_admin'] == TRUE || $this->data['data_expert'] == TRUE) { 
-				$row[] = '';
+			if($this->data['is_admin'] == TRUE || $this->data['data_expert'] == TRUE) { 
+				$actions .= '<a class="btn btn-xs btn-warning" href="'.base_url().'index.php/result/show_list/'.$person->reg_no.'" title="Hapus" ><i class="glyphicon glyphicon-list"></i></a>';
 			}
+			$row[] = $actions;
 
 			$data[] = $row;
 		}

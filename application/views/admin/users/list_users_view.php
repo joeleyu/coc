@@ -1,9 +1,9 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed');?>
-<div class="container">
+<div class="col-md-10">
     <div class="row">
         <div class="col-lg-10">
-            <a href="<?php echo site_url('admin/users/create');?>" class="btn btn-primary">Create user</a>
-            <a href="<?php echo site_url('admin/users');?>" class="btn btn-primary">See all users</a>
+            <a href="<?php echo site_url('admin/users/create');?>" class="btn btn-warning">Create user</a>
+            <a href="<?php echo site_url('admin/users');?>" class="btn btn-warning">See all users</a>
             <hr>
 
             <?php
