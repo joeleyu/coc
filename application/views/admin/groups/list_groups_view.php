@@ -1,7 +1,7 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed');?>
 <div class="col-md-10">
     <div class="row">
-        <a href="<?php echo site_url('admin/groups/create');?>" class="btn btn-warning">Create group</a>
+        <a href="<?php echo site_url('admin/groups/create');?>" class="btn btn-success">Create group</a>
         <br><br><br>
         <?php
             if(!empty($groups))

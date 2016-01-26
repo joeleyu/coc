@@ -18,6 +18,7 @@ class Result extends Admin_Controller
 		$this->load->library('Form_validation');
 		// load result model
 		$this->load->model('result_model');
+		$this->load->model('setting_model');
 
 	}
 
@@ -40,11 +41,12 @@ class Result extends Admin_Controller
 		$this->data['comptent_id'] = $comptent_id;
 		$this->data['user_result'] = $this->result_model->get_user_result($comptent_id);
 
-		$this->data['get_level'] = $this->result_model->get_level();
-		$this->data['result_type'] = $this->result_model->get_result_type();
-		$this->data['asses_type'] = $this->result_model->get_asses_type();		
-
-		$this->render('backend/result_list');
+		$this->data['get_level'] = $this->setting_model->get_level();
+		$this->data['result_type'] = $this->setting_model->get_result_type();
+		$this->data['asses_type'] = $this->setting_model->get_asses_type();		
+		$this->load->view('templates/_parts/popup_header', $this->data);
+		$this->load->view('backend/result_list', $this->data);
+		$this->load->view('templates/_parts/popup_footer');
 	}	
 
 	function add($comptent_id = NULL){
@@ -54,9 +56,11 @@ class Result extends Admin_Controller
 			redirect('person');
 		}
 
-		$this->data['get_level'] = $this->result_model->get_level();
-		$this->data['result_type'] = $this->result_model->get_result_type();
-		$this->data['asses_type'] = $this->result_model->get_asses_type();
+		$this->data['get_level'] = $this->setting_model->get_level();
+		$this->data['result_type'] = $this->setting_model->get_result_type();
+		$this->data['asses_type'] = $this->setting_model->get_asses_type();
+
+		$this->load->view('templates/_parts/popup_header', $this->data);
 
 		if(isset($_POST['add-result']))
 		{
@@ -72,13 +76,13 @@ class Result extends Admin_Controller
 				$this->result_model->add($comptent_id);
 	            //display success message
 	            $this->session->set_flashdata('msg', '<div class="alert alert-success text-center">Result Added Successfully!</div>');
-	            //$this->render('backend/result_list');	
 	            redirect('result/show_list/'.$comptent_id);
 			}
 		}
-		else{
-			$this->render('backend/result_add');
+		else{		
+			$this->load->view('backend/result_add', $this->data);
 		}
+		$this->load->view('templates/_parts/popup_footer');
 	}
 
 	function edit($comptent_id = NULL, $rid = NULL){
@@ -89,10 +93,12 @@ class Result extends Admin_Controller
 			redirect('result/show_list/'.$comptent_id);
 		}
 
-		$this->data['get_level'] = $this->result_model->get_level();
-		$this->data['result_type'] = $this->result_model->get_result_type();
-		$this->data['asses_type'] = $this->result_model->get_asses_type();
+		$this->data['get_level'] = $this->setting_model->get_level();
+		$this->data['result_type'] = $this->setting_model->get_result_type();
+		$this->data['asses_type'] = $this->setting_model->get_asses_type();
 		$this->data['user_result'] = $this->result_model->specific_user_result($comptent_id, $rid);
+
+		$this->load->view('templates/_parts/popup_header', $this->data);
 
 		if(isset($_POST['edit-result']))
 		{
@@ -112,8 +118,9 @@ class Result extends Admin_Controller
 			}
 		}
 		else{
-			$this->render('backend/result_edit');
+			$this->load->view('backend/result_edit', $this->data);
 		}
+		$this->load->view('templates/_parts/popup_footer');
 	}
 
 	function remove($comptent_id = NULL, $rid = NULL){

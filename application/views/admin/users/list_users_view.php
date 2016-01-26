@@ -2,8 +2,8 @@
 <div class="col-md-10">
     <div class="row">
         <div class="col-lg-10">
-            <a href="<?php echo site_url('admin/users/create');?>" class="btn btn-warning">Create user</a>
-            <a href="<?php echo site_url('admin/users');?>" class="btn btn-warning">See all users</a>
+            <a href="<?php echo site_url('admin/users/create');?>" class="btn btn-success">Create user</a>
+            <a href="<?php echo site_url('admin/users');?>" class="btn btn-success">See all users</a>
             <hr>
 
             <?php

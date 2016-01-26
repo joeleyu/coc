@@ -41,7 +41,9 @@ class Person extends Admin_Controller {
 				  <a class="btn btn-xs btn-danger" href="javascript:void()" title="Hapus" onclick="delete_person('."'".$person->id."'".')"><i class="glyphicon glyphicon-trash"></i></a> ';
 			}
 			if($this->data['is_admin'] == TRUE || $this->data['data_expert'] == TRUE) { 
-				$actions .= '<a class="btn btn-xs btn-warning" href="'.base_url().'index.php/result/show_list/'.$person->reg_no.'" title="Hapus" ><i class="glyphicon glyphicon-list"></i></a>';
+				$l = base_url().'index.php/result/show_list/'.$person->reg_no;
+				$link = "window.open('".$l."' , 'popup' , 'width=800,height=400,resizable=no, toolbar=no, directories=no, location=no,scrollbars=yes,menubar=no, left=100, top=50'  );return false ";				
+				$actions .= '<a class="btn btn-xs btn-warning" href="#" onclick="'.$link.'" title="Hapus" ><i class="glyphicon glyphicon-list"></i></a>';
 			}
 			$row[] = $actions;
 
