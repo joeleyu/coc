@@ -1,12 +1,10 @@
- 
-<div class="container">
+ <div class="col-md-10">
     <?php if($is_admin == TRUE || $data_encoder == TRUE) { ?>
     <button class="btn btn-success" onclick="add_person()"><i class="glyphicon glyphicon-plus"></i> Add Competent</button>
     <?php } ?>
     <button class="btn btn-default" onclick="reload_table()"><i class="glyphicon glyphicon-refresh"></i> Reload</button>
     <br />
     <br />
-    <div  class="col-md-10">
         <table id="table" class="table table-striped table-bordered" cellspacing="0" width="100%">
             <thead>
                 <tr>
@@ -21,7 +19,6 @@
             <tbody>
             </tbody>
         </table>
-    </div>
 </div>
 
 <script type="text/javascript">

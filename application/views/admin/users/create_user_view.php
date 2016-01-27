@@ -1,10 +1,10 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed');?>
-<div class="container" >
+<div class="col-md-10" >
     <div class="row">
         <div class="col-md-6">
             <h1>Create user</h1>
             <hr>
-            <?php echo form_open('',array('class'=>'form-horizontal'));?>
+            <?php echo form_open('',array('class'=>''));?>
             <div class="form-group">
                 <?php
                 echo form_label('First name','first_name');
@@ -78,7 +78,7 @@
                 }
                 ?>
             </div>
-            <?php echo form_submit('submit', 'Create user', 'class="btn btn-primary btn-lg btn-block"');?>
+            <?php echo form_submit('submit', 'Create user', 'class="btn btn-success btn-lg btn-block"');?>
             <?php echo form_close();?>
         </div>
     </div>

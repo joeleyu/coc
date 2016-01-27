@@ -7,8 +7,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title><?php echo $page_title;?></title>
         <link href="<?php echo base_url('css/bootstrap.min.css');?>" rel="stylesheet">
-        <link href="<?php echo base_url('css/local.css');?>" rel="stylesheet">
-        <link href="<?php echo base_url('css/style.css');?>" rel="stylesheet">        
+         <link href="<?php echo base_url('css/custom.css');?>" rel="stylesheet">      
         <script src="<?php echo base_url('js/jquery.js')?>"></script>
         <?php
         if($this->ion_auth->logged_in()) {
@@ -23,46 +22,36 @@
         <script src="<?php echo base_url('js/bootstrap.min.js');?>"></script>
     </head>
 <body>
-    <nav class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
-                        aria-expanded="false" aria-controls="navbar">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand"
-                   href="<?php echo site_url('home');?>"><?php echo $this->config->item('cms_title');?></a>
-            </div>
-            <div id="navbar" class="collapse navbar-collapse">
-                <ul class="nav navbar-nav">
-                    <li><a href="#">Calendar</a></li>
-                    <li><a href="#">News & Events</a></li>
-                </ul>
-                <?php
-                if($this->ion_auth->logged_in()) {
-                ?>
-                <ul class="nav navbar-nav navbar-right">
 
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><?php echo $this->ion_auth->user()->row()->username;?> <span class="caret"></span></a>
-                        <ul class="dropdown-menu" role="menu">
-                            <li><a href="<?php echo site_url('admin/user/profile');?>">Profile page</a></li>
-                            <?php echo $current_user_menu;?>
-                            <li class="divider"></li>
-                            <li><a href="<?php echo site_url('admin/user/logout');?>">Logout</a></li>
-                        </ul>
-                    </li>
-                </ul>
-                <?php
-                }
-                ?>
-            </div>
-            <!--/.nav-collapse -->
-        </div>
-    </nav>
+  <div class="header">
+    <div class="container header-inner">   
+    <ul class="nav nav-pills pull-right">
+      <li class="active"><a href="<?php echo site_url('home');?>">Home</a></li>
+      <li><a href="#">About</a></li>
+      <li><a href="#">Contact</a></li>
+        <?php
+        if($this->ion_auth->logged_in()) {
+        ?>
+            <li><a href="<?php echo site_url('admin/user/profile');?>">
+            <?php echo $this->ion_auth->user()->row()->username;?>
+            </a></li>       
+        <div class="clearfix"></div>
+        <?php
+        }
+        else{
+        ?>
+        <li><a href="<?php echo site_url('admin/user/login');?>">Login</a></li>
+        <?php
+        }
+        ?>          
+    </ul>
+    <h3 class="text-muted">
+    <a href="<?php echo site_url('home');?>">COC Confirmation System</a></h3>
+    </div>
+  </div>
+
+<div class="container main-container">      
+
     <?php if($this->session->flashdata('message')) {
         ?>
         <div class="container" style="padding-top:0px;">
@@ -74,9 +63,8 @@
         </div>
     <?php
     }
+
+    if($this->ion_auth->logged_in()) {
+     $this->load->view('templates/menu-bar'); 
+    }
     ?>
-<?php
-if($this->ion_auth->logged_in()) {
- $this->load->view('templates/menu-bar'); 
-}
- ?>

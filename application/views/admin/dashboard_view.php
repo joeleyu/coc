@@ -1,5 +1,3 @@
-<div class="col-md-12">
-	<div class="container">
+<div class="col-md-10">
 		<h1>Welcome to the Dashboard!</h1>
-	</div>
 </div>

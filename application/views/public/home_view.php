@@ -3,50 +3,66 @@
 $this->load->view('templates/_parts/admin_master_header_view'); 
 ?>
 
-<div class="container">
-    <div class="col-md-9">
+   <div class="col-md-9">
+        <h2>Official Certification Verification</h2>
+        <hr>
+        <?php echo form_open('home/search', array("class"=>"col-md-5", "role"=>"search")); ?>
+        <?php echo $this->session->flashdata('message');?>
+            <div class="form-group">
+                <label for="fullname">Registration Number:</label>
+                <input required="required" type="text" class="form-control" placeholder="" name="reg_no" value="<?php echo isset($_POST['reg_no'])? $this->input->post('reg_no'):''; ?>">
+                <span class="text-danger"><?php echo form_error('reg_no');?></span>
+            </div>
+
+            <div class="form-group">
+                <label for="fullname">Birth Date</label>
+                <input required="required" type="text" class="form-control" placeholder="D-M-Y" name="bdate" value="<?php echo isset($_POST['bdate'])? $this->input->post('bdate'):''; ?>">
+                <span class="text-danger"><?php echo form_error('bdate');?></span>
+            </div>            
+
+            <button type="submit" name="search-result" class="btn btn-success">Search</button>
+        </form>
+        <div class="col-md-5">
+        <?php if (isset($_POST['reg_no']) ) { ?>
+        <h3>Search Result</h3> <hr/>
+        <?php if(!empty($user_result)) { ?>
+            <?php foreach ($user_result as $r) {
+                //echo 'Reg No - '.$r->reg_no.'<br/>';
+                
+                foreach ($get_level as $l) {
+                    if($r->level == $l->id)
+                        echo 'Level - '.$l->level_val.'<br/>';
+                }
+            
+                foreach ($asses_type as $l) {
+                    if($r->type == $l->id)
+                        echo 'Type - '.$l->type_val.'<br/>';
+                }
+                
+                foreach ($result_type as $l) {
+                    if($r->result == $l->id)
+                        echo 'Result - '.$l->res_val.'<br/>';
+                }
+                    
+                echo '<hr/>';
+            }
+            ?>
+            
+        <?php }
+        else{
+            echo '<p class="alert alert-danger">No Result Found</p>';
+            } 
+        }
+        ?>
+        </div>
+        <div class="clearfix"></div>
+
         <h2>Welcome to COC Agency</h2>
         Sub-heading Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. 
         Aenean lacinia bibendum nulla sed consectetur. Etiam porta sem malesuada magna mollis euismod. 
         Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.
         <br><br>
-        <h2>Official Certification Verification</h2>
-        <hr>
-        <form class="navbar-form navbar-left" role="search">
-            <div class="form-group">
-                <label for="fullname">Full Name:</label>
-                <input type="text" class="form-control" placeholder="">
-            </div>
 
-            <button type="submit" class="btn btn-success">Submit</button>
-        </form>
     </div>
-    <div class="row">
-        <div class="col-md-3">
-        <?php if(!$this->ion_auth->logged_in()) { ?>
-            <h1>Login</h1>
-            <hr>
-            <?php echo $this->session->flashdata('message');?>
-            <?php echo form_open('admin/user/login',array('class'=>''));?>
-            <div class="form-group">
-                <?php echo form_label('Username','identity');?>
-                <?php echo form_error('identity');?>
-                <?php echo form_input('identity','','class="form-control"');?>
-            </div>
-            <div class="form-group">
-                <?php echo form_label('Password','password');?>
-                <?php echo form_error('password');?>
-                <?php echo form_password('password','','class="form-control"');?>
-            </div>
-            <div class="form-group">
-                <label>
-                    <?php echo form_checkbox('remember','1',FALSE);?> Remember me
-                </label>
-            </div>
-            <?php echo form_submit('submit', 'Log in', 'class="btn btn-primary btn-md btn-block"');?>
-            <?php echo form_close();?>
-           <?php } ?>
-        </div>
-    </div>
-</div>
+
 <?php $this->load->view('templates/_parts/admin_master_footer_view');  ?>

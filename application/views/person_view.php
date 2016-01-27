@@ -1,10 +1,9 @@
- 
-<div class="container">
+<div class="col-md-10">
     <button class="btn btn-success" onclick="add_person()"><i class="glyphicon glyphicon-plus"></i> Add Person</button>
     <button class="btn btn-default" onclick="reload_table()"><i class="glyphicon glyphicon-refresh"></i> Reload</button>
     <br />
     <br />
-    <div  class="col-md-10">
+    <div  class="">
         <table id="table" class="table table-striped table-bordered" cellspacing="0" width="100%">
             <thead>
                 <tr>
