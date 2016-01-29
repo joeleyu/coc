@@ -27,8 +27,8 @@
     <div class="container header-inner">   
     <ul class="nav nav-pills pull-right">
       <li class="active"><a href="<?php echo site_url('home');?>">Home</a></li>
-      <li><a href="#">About</a></li>
-      <li><a href="#">Contact</a></li>
+      <li><a href="<?php echo site_url('home/about');?>">About</a></li>
+      <li><a href="<?php echo site_url('home/contact');?>">Contact</a></li>
         <?php
         if($this->ion_auth->logged_in()) {
         ?>
